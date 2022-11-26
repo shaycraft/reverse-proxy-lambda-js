@@ -22,11 +22,6 @@ export class ResponseStream {
     constructor(streamType) {
         this.streamType = streamType;
         this.buffer = [];
-        if (streamType === ResponseStreamType.BINARY) {
-            console.debug('issa binary');
-        } else {
-            console.debug('issa text');
-        }
     }
 
     /***
