@@ -5,7 +5,7 @@ export class ResponseStreamType {
 
 export class ResponseStream {
     /***
-     * @type { any[] }
+     * @type { string | Buffer[] }
      */
     buffer;
 
@@ -26,7 +26,7 @@ export class ResponseStream {
 
     /***
      *
-     * @param val {any}
+     * @param val {string | Buffer}
      */
     push(val) {
         this.buffer.push(val);

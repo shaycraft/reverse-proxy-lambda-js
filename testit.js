@@ -15,15 +15,16 @@ function main() {
     const expectedBase64 = data.toString('base64');
 
     const buff1 = data.slice(0, Math.floor(data.length / 2));
-    const buff2 = data.slice(data.length - buff1.length);
+    const buff2 = data.slice(buff1.length);
 
 
-    obj.push(buff1.toString());
-    obj.push(buff2.toString());
+    obj.push(buff1);
+    obj.push(buff2);
 
     const res = obj.dump();
-    console.debug(expectedBase64);
-    // console.debug(res);
+    // console.debug(expectedBase64);
+    console.debug(res);
+    // console.debug(`length = ${data.length}`);
 }
 
 main();
