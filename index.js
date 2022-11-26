@@ -1,3 +1,6 @@
+import {ResponseStream, ResponseStreamType} from './response-stream';
+
+
 /***
  *
  * @param event {
@@ -6,6 +9,10 @@
  * @returns {Promise<{body: string, statusCode: number}>}
  */
 exports.handler = async (event) => {
+    /**
+     * @type {ResponseStream}
+     */
+    let responseStream;
 
     let url = `https://sampleserver6.arcgisonline.com/${event['pathParameters']['proxy']}`;
     let httpMethod;
@@ -31,8 +38,6 @@ exports.handler = async (event) => {
     delete headers['host'];
 
     let body = event['body'] || null;
-
-
 
 
     // TODO implement
