@@ -1,4 +1,51 @@
 import {ResponseStream, ResponseStreamType} from './response-stream';
+import * as https from 'https';
+
+/***
+ *
+ * @param url {string}
+ * @param headers {unknown}
+ * @returns {Promise<{statusCode: number, body: string}>}
+ */
+async function issueRequest(url, headers) {
+    return new Promise((resolve, reject) => {
+
+        /**
+         *
+         * @type {RequestOptions}
+         */
+        const options = {headers};
+
+        https.get(url, options, (response) => {
+            /***
+             * @type {ResponseStream}
+             */
+            let stream;
+            const headers = {'content-type': response.headers['content-type']};
+
+            if (response.headers['content-type'].indexOf('html') > -1 || response.headers['content-type'].indexOf('json') > -1) {
+                stream = new ResponseStream(ResponseStreamType.BINARY);
+            } else {
+                stream = new ResponseStream(ResponseStreamType.PLAINTEXT);
+            }
+
+            response.on('data', (chunk) => {
+                stream.push(chunk);
+            });
+
+            response.on('end', () => {
+                resolve({
+                    ...stream.dump(),
+                    headers
+                });
+            });
+
+            response.on('error', (err) => {
+                reject(err);
+            })
+        });
+    });
+}
 
 
 /***
@@ -39,10 +86,11 @@ exports.handler = async (event) => {
 
     let body = event['body'] || null;
 
-
-    // TODO implement
-    const response = {
-        statusCode: 200, body: JSON.stringify('Hello from Lambda!'),
-    };
-    return response;
+    try {
+        return issueRequest(url, headers);
+    } catch (err) {
+        return {
+            statusCode: 500, body: `Content error: ${JSON.stringify(err)}`
+        }
+    }
 };

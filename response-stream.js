@@ -29,14 +29,32 @@ export class ResponseStream {
      * @param val {string | Buffer}
      */
     push(val) {
-        this.buffer.push(val);
+        if (this.streamType === ResponseStreamType.PLAINTEXT) {
+            this.buffer.push(Buffer.from(val).toString('utf-8'));
+        } else {
+            this.buffer.push(val);
+        }
     }
 
+    /***
+     *
+     * @returns {{responseCode: number, isBase64Encoded: boolean, body: string}}
+     */
     dump() {
         if (this.streamType === ResponseStreamType.BINARY) {
-            return Buffer.concat(this.buffer.map(item => Buffer.from(item))).toString('base64')
+            const body = Buffer.concat(this.buffer.map(item => Buffer.from(item))).toString('base64');
+            return {
+                responseCode: 200,
+                isBase64Encoded: true,
+                body
+            }
         } else {
-            return this.buffer.join('');
+            const body = this.buffer.join('');
+            return {
+                responseCode: 200,
+                isBase64Encoded: false,
+                body
+            }
         }
     }
 }
