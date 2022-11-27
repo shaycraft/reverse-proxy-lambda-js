@@ -2,11 +2,15 @@
   "name": "reverse-proxy-lambda",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "testit.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.8.0"
+  }
 }
