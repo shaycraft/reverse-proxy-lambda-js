@@ -1,5 +1,6 @@
-import { ResponseStream, ResponseStreamType } from './response-stream';
-import * as https from 'https';
+const ResponseStream = require('./response-stream');
+const ResponseStreamType = require('./response-stream-type');
+const https = require('https');
 
 /***
  *

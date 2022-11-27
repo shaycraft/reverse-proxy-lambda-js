@@ -1,9 +1,6 @@
-export class ResponseStreamType {
-  static PLAINTEXT = 'PLAINTEXT';
-  static BINARY = 'BINARY';
-}
+const ResponseStreamType = require('./response-stream-type');
 
-export class ResponseStream {
+class ResponseStream {
   /***
    * @type { string | Buffer[] }
    */
@@ -60,3 +57,5 @@ export class ResponseStream {
     }
   }
 }
+
+module.exports = ResponseStream;
