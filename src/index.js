@@ -1,5 +1,5 @@
-// import { ResponseStream, ResponseStreamType } from './response-stream';
-const rs = require('./response-stream');
+const ResponseStream = require('./response-stream');
+const ResponseStreamType = require('./response-stream-type');
 const https = require('https');
 
 /***
@@ -27,9 +27,9 @@ async function issueRequest(url, headers) {
         response.headers['content-type'].indexOf('html') > -1 ||
         response.headers['content-type'].indexOf('json') > -1
       ) {
-        stream = new rs.ResponseStream(rs.ResponseStreamType.BINARY);
+        stream = new ResponseStream(ResponseStreamType.BINARY);
       } else {
-        stream = new rs.ResponseStream(rs.ResponseStreamType.PLAINTEXT);
+        stream = new ResponseStream(ResponseStreamType.PLAINTEXT);
       }
 
       response.on('data', (chunk) => {

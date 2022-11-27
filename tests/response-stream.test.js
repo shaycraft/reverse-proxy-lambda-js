@@ -1,10 +1,11 @@
-const rs = require('../src/response-stream');
 const fs = require('fs');
+const ResponseStream = require('../src/response-stream');
+const ResponseStreamType = require('../src/response-stream-type');
 
 describe('Response stream tester', () => {
   test('Instantiates constructor without error', () => {
     const derPath = './assets/der.jpg'; // relative to test run, not this file
-    const obj = new rs.ResponseStream(rs.ResponseStreamType.BINARY);
+    const obj = new ResponseStream(ResponseStreamType.BINARY);
     const data = fs.readFileSync(derPath);
     const expectedBase64 = data.toString('base64');
 
