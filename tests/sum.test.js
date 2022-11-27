@@ -1,4 +1,4 @@
-const rs = require('../response-stream');
+const rs = require('../src/response-stream');
 
 describe('Response stream tester', () => {
   test('Instantiates constructor without error', () => {
