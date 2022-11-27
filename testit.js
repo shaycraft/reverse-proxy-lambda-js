@@ -1,9 +1,9 @@
-import { ResponseStream, ResponseStreamType } from './response-stream.js';
+const rs = require('./response-stream');
 import * as fs from 'fs';
 
 function main() {
   const path = './assets/der.jpg';
-  const obj = new ResponseStream(ResponseStreamType.BINARY);
+  const obj = new rs.ResponseStream(rs.ResponseStreamType.BINARY);
 
   new Uint8Array([0x42, 0x33]);
 

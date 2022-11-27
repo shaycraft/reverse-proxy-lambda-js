@@ -1,4 +1,5 @@
-import { ResponseStream, ResponseStreamType } from './response-stream';
+// import { ResponseStream, ResponseStreamType } from './response-stream';
+const rs = require('./response-stream');
 import * as https from 'https';
 
 /***
@@ -26,9 +27,9 @@ async function issueRequest(url, headers) {
         response.headers['content-type'].indexOf('html') > -1 ||
         response.headers['content-type'].indexOf('json') > -1
       ) {
-        stream = new ResponseStream(ResponseStreamType.BINARY);
+        stream = new rs.ResponseStream(rs.ResponseStreamType.BINARY);
       } else {
-        stream = new ResponseStream(ResponseStreamType.PLAINTEXT);
+        stream = new rs.ResponseStream(rs.ResponseStreamType.PLAINTEXT);
       }
 
       response.on('data', (chunk) => {

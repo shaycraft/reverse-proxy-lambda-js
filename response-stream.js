@@ -1,9 +1,9 @@
-export class ResponseStreamType {
+class ResponseStreamType {
   static PLAINTEXT = 'PLAINTEXT';
   static BINARY = 'BINARY';
 }
 
-export class ResponseStream {
+class ResponseStream {
   /***
    * @type { string | Buffer[] }
    */
@@ -59,4 +59,9 @@ export class ResponseStream {
       };
     }
   }
+}
+
+module.exports = {
+  ResponseStream: ResponseStream,
+  ResponseStreamType: ResponseStreamType
 }
